@@ -14,3 +14,11 @@ after_success:
   - docker build -t bonsi/multi-nginx ./nginx
   - docker build -t bonsi/multi-server ./server
   - docker build -t bonsi/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push bonsi/multi-client
+  - docker push bonsi/multi-nginx
+  - docker push bonsi/multi-server
+  - docker push bonsi/multi-worker
+
